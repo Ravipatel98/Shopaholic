@@ -1,0 +1,94 @@
+----------------------------------------how to create contextapi------------------------------------------------
+
+#create reducer file and reducer function will take state and action as argument and return state acording to action
+
+
+-------use this as an example------
+const cartReducer = (state, action)=> {
+        switch(action.type){
+
+            default:
+                return state;
+        }
+}
+
+export default  cartReducer
+
+--------------------------------------------------------------
+# now cretae another file to cretae context 
+
+# import createContext and useReducer from react
+# import reducer file
+
+# create context and export 
+export const ProductsContext = createContext();
+
+# define initial state
+
+const initialState = {
+    cartItems :[],
+    itemCount: 0;
+    total: 0;
+}
+
+
+# initialize context provider which will take children as argument ans
+  it will have useReducer(reducer,initialState) hook
+  destructure state and dispatch from useReducer
+
+  then define contextValues and spread state
+
+  const CartContextProvider = ({children})=>{
+
+      const [state,dispatch] = useReducer(cartReducer,initialState);
+
+      const contextValues ={
+          ...state,
+      }
+
+      return (
+          <CartContext.Provider value={{contextValues}}>
+          {
+            children
+          }
+          </CartContext.Provider>
+      );
+  }
+
+it will return context.provider which will take value prop
+
+wrap children in context.provider 
+
+# now export defualt CartContextProvider
+
+---------example-----------
+
+export const cartContext = createContext();
+
+const initialState = {
+    cartItems :[],
+    itemCount: 0;
+    total: 0;
+}
+
+
+ const CartContextProvider = ({children})=>{
+
+
+      const [state,dispatch] = useReducer(cartReducer,initialState);
+
+
+      const contextValues ={
+          ...state,
+      }
+
+      return (
+          <CartContext.Provider value={{contextValues}}>
+          {
+            children
+          }
+          </CartContext.Provider>
+      );
+  }
+
+export defualt CartContextProvider
